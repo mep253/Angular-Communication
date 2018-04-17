@@ -34,7 +34,11 @@ export class ProductListComponent implements OnInit {
     toggleImage(): void {
         this.showImage = !this.showImage;
     }
-
+    // two way binding, the long way
+    onFilterChange(filter) {
+        this.listFilter = filter;
+        this.performFilter(this.listFilter);
+    }
     performFilter(filterBy?: string): void {
         if (filterBy) {
             this.filteredProducts = this.products.filter((product: IProduct) =>
