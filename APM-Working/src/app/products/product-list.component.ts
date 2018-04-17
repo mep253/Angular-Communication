@@ -44,8 +44,8 @@ export class ProductListComponent implements OnInit, AfterViewInit {
         console.log(this.filterInput);
         // watch for changes
         this.filterInput.valueChanges.subscribe(
-            () => this.performFilter(this.listFilter);
-        )
+            () => this.performFilter(this.listFilter)
+        );
     }
     // Getter and Setter
     // private _listFilter: string;
