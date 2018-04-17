@@ -17,7 +17,8 @@ import { FilterComponent } from './filter/filter.component';
   exports: [
     StarComponent,
     CommonModule,
-    FormsModule
+    FormsModule,
+    FilterComponent
   ]
 })
 export class SharedModule { }
