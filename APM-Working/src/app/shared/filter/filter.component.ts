@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'pm-filter',
@@ -6,18 +7,30 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Input, OnChang
   styleUrls: ['./filter.component.css']
 })
 export class FilterComponent implements OnInit, AfterViewInit, OnChanges {
-  listFilter: string;
+
   filterMsg: string;
   @Input() showDetails: boolean;
   @Input() foundItems: number;
+  @Output() filterChange: EventEmitter<string> = new EventEmitter<string>();
+
+  private _listFilter: string;
+  get listFilter() {
+    return this._listFilter;
+  }
+  set listFilter(value) {
+    this._listFilter = value;
+    this.filterChange.emit(value);
+  }
+
   // access to the html reference- properies and methods
   @ViewChild('filterElement') filterElement: ElementRef;
   constructor() { }
 
   ngOnInit() {
+
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
+    // console.log(changes);
     if (changes['foundItems'] && !changes['foundItems'].currentValue) {
       this.filterMsg = 'No hits';
     } else {
