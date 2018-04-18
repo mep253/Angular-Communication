@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angula
 import { IProduct } from './product';
 import { ProductService } from './product.service';
 import { NgModel } from '@angular/forms';
+import { FilterComponent } from '../shared/filter/filter.component';
 
 @Component({
     templateUrl: './product-list.component.html',
@@ -10,7 +11,7 @@ import { NgModel } from '@angular/forms';
 })
 export class ProductListComponent implements OnInit, AfterViewInit {
     pageTitle: string = 'Product List';
-    listFilter: string;
+    parentFilter: string;
     showImage: boolean;
     displayFilter: boolean = true;
 
@@ -20,6 +21,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
     filteredProducts: IProduct[];
     products: IProduct[];
+    @ViewChild(FilterComponent) filter: FilterComponent;
 
     constructor(private productService: ProductService) { }
 
@@ -27,13 +29,14 @@ export class ProductListComponent implements OnInit, AfterViewInit {
         this.productService.getProducts().subscribe(
             (products: IProduct[]) => {
                 this.products = products;
-                this.performFilter(this.listFilter);
+                this.performFilter(this.parentFilter);
             },
             (error: any) => this.errorMessage = <any>error
         );
     }
 
     ngAfterViewInit(): void {
+        this.parentFilter = this.filter.listFilter;
         // console.log(this.filterElement);
         // // set focus
         // this.filterElement.nativeElement.focus();
