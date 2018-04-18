@@ -8,6 +8,7 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Input } from '
 export class FilterComponent implements OnInit, AfterViewInit {
   listFilter: string;
   @Input() showDetails: boolean;
+  @Input() foundItems: number;
   // access to the html reference- properies and methods
   @ViewChild('filterElement') filterElement: ElementRef;
   constructor() { }
