@@ -22,5 +22,8 @@ export class ProductShellListComponent implements OnInit {
       (error: any) => this.errorMessage = <any>error
     );
   }
-
+  selectProduct(product) {
+    this.productService.currentProduct = product;
+    // console.log(this.productService.currentProduct);
+  }
 }
